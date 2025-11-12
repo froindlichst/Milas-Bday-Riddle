@@ -3,47 +3,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Das Archiv der Sonne</title>
+<title>Die Stufe, die sich selbst umkreist</title>
 <style>
   :root { --bg:#0b1f17; --fg:#e6f2ea; --accent:#9ee2b0; --muted:#a3b9ae; }
-  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family: "Georgia", serif;}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:"Georgia", serif;}
   .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:6rem 1.25rem;}
-  .card{max-width:800px; line-height:1.65; position:relative;}
-  h1{font-weight:500; letter-spacing:0.02em; margin:0 0 1rem 0;}
-  p{margin:0 0 1rem 0; color:var(--muted)}
+  .card{max-width:800px; line-height:1.7; position:relative;}
+  h1{font-weight:500; letter-spacing:.02em; margin:0 0 .75rem;}
+  p{margin:.25rem 0 1rem; color:var(--muted)}
   .verse{border-left:3px solid rgba(158,226,176,.35); padding-left:1rem; margin:1.5rem 0; position:relative;}
-  .verse span.initial{font-weight:700; color:var(--accent); text-shadow:0 0 8px rgba(158,226,176,.35)}
-  .hint{font-size:.95rem; color:#93a69d; margin-top:.75rem;}
   .gate{margin-top:1.5rem; display:flex; gap:.5rem; flex-wrap:wrap;}
-  input[type="text"]{flex:1; min-width:260px; padding:.85rem 1rem; border-radius:8px; border:1px solid #2a4b3d; background:#0e251c; color:var(--fg); outline:none;}
+  input[type="text"]{flex:1; min-width:240px; padding:.85rem 1rem; border-radius:8px; border:1px solid #2a4b3d; background:#0e251c; color:var(--fg); outline:none; text-transform:uppercase}
   input::placeholder{color:#6f8b7e;}
   button{padding:.85rem 1.1rem; border-radius:8px; border:1px solid #2a4b3d; background:#123b2c; color:var(--fg); cursor:pointer;}
   button:hover{background:#144231}
-  .spiral{position:fixed; inset:auto -20vw -20vh auto; width:45vmin; height:45vmin; pointer-events:none; opacity:.25; filter:blur(.2px)}
-  svg{width:100%; height:100%}
   .err{color:#f3a5a5; margin-top:.5rem; min-height:1.2em}
+  .spiral{position:fixed; inset:auto -25vw -25vh auto; width:50vmin; height:50vmin; pointer-events:none; opacity:.25}
+  svg{width:100%; height:100%}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="card">
-    <h1>Das Archiv der Sonne</h1>
-    <p>Im Wald der Spiegel atmet ein Name. Lies ihn nicht in der Mitte, sondern <em>am Rand</em>. Achte nicht auf Zahlen, sondern auf die Spur, die der Morgen im Blatt zurücklässt.</p>
+    <h1>Die Stufe, die sich selbst umkreist</h1>
     <div class="verse">
-      <p><span class="initial">S</span>till erhebe dich, auf Händen wie auf Flügeln.</p>
-      <p><span class="initial">P</span>fade öffnen sich, wenn das Herz zuerst hört.</p>
-      <p><span class="initial">I</span>m Kreis verschwindet Anfang und Ende.</p>
-      <p><span class="initial">R</span>uhe ist ein Tanz, der nach links schlägt.</p>
-      <p><span class="initial">A</span>tem macht aus Schatten Licht.</p>
-      <p><span class="initial">M</span>andala aus Grün, du kennst die Form.</p>
-      <p><span class="initial">I</span>n deinem Wagen schlafen Sterne.</p>
-      <p><span class="initial">L</span>inkes Feuer, klare Stimme.</p>
-      <p><span class="initial">A</span>lles entfaltet sich spiralig, wenn du da bist.</p>
-      <p class="hint">Finde den äußeren Faden und sprich das Wort leise.</p>
+      <p>Ich bin die Stufe, die sich selbst umkreist.</p>
+      <p>Aus zwei Seiten und unsichtbaren Sprossen entsteht mein Gang;</p>
+      <p>manche sehen darin eine Leiter, andere einen Kuss zweier Wege.</p>
+      <p>Ich ruhe im eingerollten Blatt, ich singe in Körben und Zapfen,</p>
+      <p>und im Atem der Erde beginnt mein Name.</p>
+      <p>Nenne ihn.</p>
     </div>
 
     <div class="gate" aria-label="Passwort-Eingang">
-      <input id="pw" type="text" inputmode="text" autocomplete="off" placeholder="Wort eingeben …">
+      <input id="pw" type="text" inputmode="text" autocomplete="off" placeholder="Name eingeben …">
       <button id="go">Öffnen</button>
     </div>
     <div id="err" class="err" role="status" aria-live="polite"></div>
@@ -58,7 +51,7 @@
       <stop offset="100%" stop-color="#9ee2b0" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <path id="golden" fill="none" stroke="url(#g)" stroke-width="0.8" d="
+  <path fill="none" stroke="url(#g)" stroke-width="0.8" d="
     M50,50
     m0,-1
     a1,1 0 1,1 0,2
@@ -78,7 +71,7 @@
 <script>
 (function(){
   function norm(s){ return (s||"").normalize("NFKD").replace(/[^a-zA-Z]/g,"").toLowerCase(); }
-  const ok = "spiramila"; // SPIRAMILA
+  const ok = "helix";
   const input = document.getElementById('pw');
   const btn = document.getElementById('go');
   const err = document.getElementById('err');
@@ -88,7 +81,7 @@
     if(v === ok){
       window.location.href = "page2.html";
     }else{
-      err.textContent = "Das scheint nicht der richtige Faden zu sein.";
+      err.textContent = "Nicht jede Spirale führt zum Ziel.";
       input.focus();
     }
   }

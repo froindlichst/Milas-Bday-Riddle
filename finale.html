@@ -3,38 +3,96 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Farnlicht</title>
+<title>Farnlicht – Das letzte Tor</title>
 <style>
-  :root { --bg:#06140f; --fg:#e6f2ea; --accent:#bdecc9; --muted:#a1b6ab; }
+  :root { --bg:#06140f; --fg:#e6f2ea; --accent:#bdecc9; --muted:#a1b6ab; --line:#2a4b3d; }
   html,body{margin:0;height:100%;background:radial-gradient(1200px 800px at 70% 80%, #103e2c 0%, #0a231a 45%, #06140f 100%);color:var(--fg);font-family:"Georgia", serif;}
   .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:6rem 1.25rem;}
   .card{max-width:880px; line-height:1.7; position:relative; text-align:center;}
   h1{font-weight:500; letter-spacing:0.02em; margin:0 0 1rem 0;}
   p{margin:0 0 1rem 0; color:var(--muted)}
-  figure{margin:1.25rem auto; max-width:720px;}
+  .verse{border-left:3px solid rgba(189,236,201,.35); padding:.9rem 1rem; margin:1.25rem 0; text-align:left;}
+  .gate{margin-top:1rem; display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; justify-content:center}
+  input[type="text"]{min-width:240px; padding:.7rem .9rem; border-radius:8px; border:1px solid var(--line); background:#0c241c; color:var(--fg); text-transform:uppercase; outline:none}
+  button{padding:.75rem 1rem; border-radius:8px; border:1px solid var(--line); background:#103528; color:var(--fg); cursor:pointer;}
+  button:hover{background:#123d2e}
+  .err{color:#f3a5a5; margin-top:.5rem; min-height:1.2em}
+  figure{margin:1.25rem auto; max-width:720px; display:none;}
   img{max-width:100%; border-radius:12px; display:block; margin:0 auto; box-shadow:0 10px 40px rgba(0,0,0,.35)}
-  .note{font-size:.95rem; color:#8e9f97; margin-top:1rem;}
-  .small{font-size:.9rem; opacity:.85}
+  figcaption{font-size:.9rem; color:#8e9f97; margin-top:.5rem;}
+  .msg{margin-top:1rem; font-size:1.05rem; display:none;}
+  .heart{color:#b889d6}
+  .hint{font-size:.95rem; color:#8ea79a; margin-top:.75rem;}
   .btnrow{margin-top:1rem}
-  a.btn{display:inline-block; padding:.7rem 1rem; border-radius:8px; border:1px solid #2a4b3d; background:#103528; color:var(--fg); text-decoration:none}
+  a.btn{display:inline-block; padding:.7rem 1rem; border-radius:8px; border:1px solid var(--line); background:#103528; color:var(--fg); text-decoration:none}
   a.btn:hover{background:#123d2e}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="card">
-    <h1>Farnlicht</h1>
-    <p>Du hast den Kreis geschlossen.</p>
-    <figure>
-      <!-- Ersetze die Bildquelle unten durch dein bevorzugtes Farnfoto (lokal oder URL) -->
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Fern_unfurling.jpg/1024px-Fern_unfurling.jpg" alt="Ein junges Farnblatt, das sich spiralig entrollt.">
-      <figcaption class="small">Ein junges Farnblatt (circinate Vernation).</figcaption>
-    </figure>
-    <p class="note">Tipp: Ersetze in dieser Datei die <code>img src</code>-Adresse durch dein gewünschtes Bild.</p>
-    <div class="btnrow">
-      <a class="btn" href="index.html">Nochmal beginnen</a>
+    <h1>Das letzte Tor</h1>
+
+    <div class="verse">
+      <p>Ich bin das Antlitz der Erde, wenn sie träumt.</p>
+      <p>Ich wachse aus Licht und Erinnerung,</p>
+      <p>fülle Täler mit Atem und Wälder mit Zeit.</p>
+      <p>Ich bin kein einzelner Spross,</p>
+      <p>sondern die Summe alles Grünen.</p>
+      <p>Wie heiße ich?</p>
     </div>
+
+    <div class="gate" aria-label="Passwort-Eingang">
+      <input id="pw" type="text" inputmode="text" autocomplete="off" placeholder="Name eingeben …">
+      <button id="go">Zeig es mir</button>
+    </div>
+    <div id="err" class="err" role="status" aria-live="polite"></div>
+
+    <figure id="pic">
+      <img src="fern.jpg" alt="Ein uriges Farnblatt im Halbdunkel eines alten Waldes.">
+      <figcaption>Farnlicht – das Versprechen der Spirale.</figcaption>
+    </figure>
+
+    <p id="msg" class="msg"><strong>Herzlichen Glückwunsch zum Geburtstag, Mila!</strong><br>Schön das du geboren bist, hätte dich sonst sehr vermisst <span class="heart">💜</span></p>
+
+    <div class="btnrow">
+      <a class="btn" href="index.html">Neu beginnen</a>
+    </div>
+
+    <p class="hint">Hinweis: Ein Wort für die gesamte Pflanzenwelt. Lateinische Variante ist ebenfalls gültig.</p>
   </div>
 </div>
+
+<script>
+(function(){
+  function norm(s){ return (s||"").normalize("NFKD").replace(/[^a-zA-Z]/g,"").toLowerCase(); }
+  const ok = ["flora","floralis"];
+  const input = document.getElementById('pw');
+  const btn = document.getElementById('go');
+  const err = document.getElementById('err');
+  const pic = document.getElementById('pic');
+  const msg = document.getElementById('msg');
+
+  function show(){
+    pic.style.display = 'block';
+    msg.style.display = 'block';
+    setTimeout(()=>{ pic.scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
+  }
+
+  function check(){
+    const v = norm(input.value);
+    if(ok.includes(v)){
+      err.textContent = '';
+      show();
+    }else{
+      err.textContent = 'Fast. Denke an ein Wort für die gesamte Pflanzenwelt – oder sein lateinisches Adjektiv.';
+      input.focus();
+    }
+  }
+
+  btn.addEventListener('click', check);
+  input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ check(); }});
+})();
+</script>
 </body>
 </html>

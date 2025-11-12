@@ -13,7 +13,7 @@
   p{margin:0 0 1rem 0; color:var(--muted)}
   .verse{border-left:3px solid rgba(189,236,201,.35); padding-left:1rem; margin:1.5rem 0; position:relative;}
   .gate{margin-top:1.75rem; display:flex; gap:.5rem; flex-wrap:wrap;}
-  input[type="text"]{flex:1; min-width:260px; padding:.85rem 1rem; border-radius:8px; border:1px solid #2a4b3d; background:#0c241c; color:var(--fg); outline:none;}
+  input[type="text"]{flex:1; min-width:260px; padding:.85rem 1rem; border-radius:8px; border:1px solid #2a4b3d; background:#0c241c; color:var(--fg); outline:none; text-transform:uppercase}
   input::placeholder{color:#6f8b7e;}
   button{padding:.85rem 1.1rem; border-radius:8px; border:1px solid #2a4b3d; background:#103528; color:var(--fg); cursor:pointer;}
   button:hover{background:#123d2e}
@@ -27,11 +27,11 @@
   <div class="card fade">
     <h1>Das Gedächtnis der Schatten</h1>
     <div class="verse">
-      <p>Ich bin die Ordnung, in der Blätter wachsen, das geheime Maß zwischen Sonne und Stiel.</p>
-      <p>Ich drehe mich weiter, ohne je zurückzugehen – und doch nennt man mich Ruhe.</p>
-      <p>Man findet mich in Zapfen, Körben, Samen, in der Stirn der Sonnenblume und im Schweigen des Farnes,</p>
-      <p>wo das Junge eingerollt liegt wie ein Versprechen.</p>
-      <p>Nenne meinen Namen.</p>
+      <p>Ich wachse dort, wo niemand hinsieht.</p>
+      <p>Ich bin das Gespräch der Bäume ohne Worte, der Atem der Erde, der durch Wurzeln reist.</p>
+      <p>Ich trage kein Blatt, kein Licht – und doch verbinde ich Wälder, Steine, das Sterbende und das Werdende.</p>
+      <p>Ich bin das unsichtbare Netz unter jedem Schritt, das Wissen, das nicht spricht, sondern wächst.</p>
+      <p>Nenne mich beim Namen.</p>
     </div>
 
     <div class="gate" aria-label="Passwort-Eingang">
@@ -45,8 +45,8 @@
 <script>
 (function(){
   function norm(s){ return (s||"").normalize("NFKD").replace(/[^a-zA-Z]/g,"").toLowerCase(); }
-  const ok1 = "fyllotaxis";
-  const ok2 = "phyllotaxis";
+  const ok1 = "mycelium";
+  const ok2 = "myzel"; // akzeptiere deutsche Kurzform optional
   const input = document.getElementById('pw');
   const btn = document.getElementById('go');
   const err = document.getElementById('err');
@@ -56,7 +56,7 @@
     if(v === ok1 || v === ok2){
       window.location.href = "finale.html";
     }else{
-      err.textContent = "Noch nicht. Lausche der Spirale zwischen Blatt und Licht.";
+      err.textContent = "Noch nicht. Denke unter die Erde – an das Netz, das alles verbindet.";
       input.focus();
     }
   }
