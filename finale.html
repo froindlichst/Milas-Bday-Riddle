@@ -22,7 +22,6 @@
   figcaption{font-size:.9rem; color:#8e9f97; margin-top:.5rem;}
   .msg{margin-top:1rem; font-size:1.05rem; display:none;}
   .heart{color:#b889d6}
-  .hint{font-size:.95rem; color:#8ea79a; margin-top:.75rem;}
   .btnrow{margin-top:1rem}
   a.btn{display:inline-block; padding:.7rem 1rem; border-radius:8px; border:1px solid var(--line); background:#103528; color:var(--fg); text-decoration:none}
   a.btn:hover{background:#123d2e}
@@ -58,8 +57,6 @@
     <div class="btnrow">
       <a class="btn" href="index.html">Neu beginnen</a>
     </div>
-
-    <p class="hint">Hinweis: Ein Wort für die gesamte Pflanzenwelt. Lateinische Variante ist ebenfalls gültig.</p>
   </div>
 </div>
 
@@ -72,6 +69,7 @@
   const err = document.getElementById('err');
   const pic = document.getElementById('pic');
   const msg = document.getElementById('msg');
+  let attempt = 0;
 
   function show(){
     pic.style.display = 'block';
@@ -85,7 +83,12 @@
       err.textContent = '';
       show();
     }else{
-      err.textContent = 'Fast. Denke an ein Wort für die gesamte Pflanzenwelt – oder sein lateinisches Adjektiv.';
+      attempt++;
+      if(attempt === 1){
+        err.textContent = 'Fast. Ein Tipp: Es bezeichnet die gesamte Pflanzenwelt – oder deren lateinische Form.';
+      }else{
+        err.textContent = 'Noch nicht. Lies das Rätsel noch einmal genau.';
+      }
       input.focus();
     }
   }
