@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Das Archiv der Sonne</title>
+<style>
+  :root { --bg:#0b1f17; --fg:#e6f2ea; --accent:#9ee2b0; --muted:#a3b9ae; }
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family: "Georgia", serif;}
+  .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:6rem 1.25rem;}
+  .card{max-width:800px; line-height:1.65; position:relative;}
+  h1{font-weight:500; letter-spacing:0.02em; margin:0 0 1rem 0;}
+  p{margin:0 0 1rem 0; color:var(--muted)}
+  .verse{border-left:3px solid rgba(158,226,176,.35); padding-left:1rem; margin:1.5rem 0; position:relative;}
+  .verse span.initial{font-weight:700; color:var(--accent); text-shadow:0 0 8px rgba(158,226,176,.35)}
+  .hint{font-size:.95rem; color:#93a69d; margin-top:.75rem;}
+  .gate{margin-top:1.5rem; display:flex; gap:.5rem; flex-wrap:wrap;}
+  input[type="text"]{flex:1; min-width:260px; padding:.85rem 1rem; border-radius:8px; border:1px solid #2a4b3d; background:#0e251c; color:var(--fg); outline:none;}
+  input::placeholder{color:#6f8b7e;}
+  button{padding:.85rem 1.1rem; border-radius:8px; border:1px solid #2a4b3d; background:#123b2c; color:var(--fg); cursor:pointer;}
+  button:hover{background:#144231}
+  .spiral{position:fixed; inset:auto -20vw -20vh auto; width:45vmin; height:45vmin; pointer-events:none; opacity:.25; filter:blur(.2px)}
+  svg{width:100%; height:100%}
+  .err{color:#f3a5a5; margin-top:.5rem; min-height:1.2em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>Das Archiv der Sonne</h1>
+    <p>Im Wald der Spiegel atmet ein Name. Lies ihn nicht in der Mitte, sondern <em>am Rand</em>. Achte nicht auf Zahlen, sondern auf die Spur, die der Morgen im Blatt zurücklässt.</p>
+    <div class="verse">
+      <p><span class="initial">S</span>till erhebe dich, auf Händen wie auf Flügeln.</p>
+      <p><span class="initial">P</span>fade öffnen sich, wenn das Herz zuerst hört.</p>
+      <p><span class="initial">I</span>m Kreis verschwindet Anfang und Ende.</p>
+      <p><span class="initial">R</span>uhe ist ein Tanz, der nach links schlägt.</p>
+      <p><span class="initial">A</span>tem macht aus Schatten Licht.</p>
+      <p><span class="initial">M</span>andala aus Grün, du kennst die Form.</p>
+      <p><span class="initial">I</span>n deinem Wagen schlafen Sterne.</p>
+      <p><span class="initial">L</span>inkes Feuer, klare Stimme.</p>
+      <p><span class="initial">A</span>lles entfaltet sich spiralig, wenn du da bist.</p>
+      <p class="hint">Finde den äußeren Faden und sprich das Wort leise.</p>
+    </div>
+
+    <div class="gate" aria-label="Passwort-Eingang">
+      <input id="pw" type="text" inputmode="text" autocomplete="off" placeholder="Wort eingeben …">
+      <button id="go">Öffnen</button>
+    </div>
+    <div id="err" class="err" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<div class="spiral" aria-hidden="true">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#9ee2b0" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#9ee2b0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path id="golden" fill="none" stroke="url(#g)" stroke-width="0.8" d="
+    M50,50
+    m0,-1
+    a1,1 0 1,1 0,2
+    m0,-2
+    a2,2 0 1,1 0,4
+    m0,-4
+    a4,4 0 1,1 0,8
+    m0,-8
+    a8,8 0 1,1 0,16
+    m0,-16
+    a16,16 0 1,1 0,32
+    m0,-32
+    a32,32 0 1,1 0,64" />
+</svg>
+</div>
+
+<script>
+(function(){
+  function norm(s){ return (s||"").normalize("NFKD").replace(/[^a-zA-Z]/g,"").toLowerCase(); }
+  const ok = "spiramila"; // SPIRAMILA
+  const input = document.getElementById('pw');
+  const btn = document.getElementById('go');
+  const err = document.getElementById('err');
+
+  function check(){
+    const v = norm(input.value);
+    if(v === ok){
+      window.location.href = "page2.html";
+    }else{
+      err.textContent = "Das scheint nicht der richtige Faden zu sein.";
+      input.focus();
+    }
+  }
+  btn.addEventListener('click', check);
+  input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ check(); }});
+})();
+</script>
+</body>
+</html>

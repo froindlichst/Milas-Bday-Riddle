@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Das Gedächtnis der Schatten</title>
+<style>
+  :root { --bg:#081a14; --fg:#e6f2ea; --accent:#bdecc9; --muted:#9cb3a7; }
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:"Georgia", serif;}
+  .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:6rem 1.25rem;}
+  .card{max-width:820px; line-height:1.75; position:relative;}
+  h1{font-weight:500; letter-spacing:0.02em; margin:0 0 1rem 0;}
+  p{margin:0 0 1rem 0; color:var(--muted)}
+  .verse{border-left:3px solid rgba(189,236,201,.35); padding-left:1rem; margin:1.5rem 0; position:relative;}
+  .gate{margin-top:1.75rem; display:flex; gap:.5rem; flex-wrap:wrap;}
+  input[type="text"]{flex:1; min-width:260px; padding:.85rem 1rem; border-radius:8px; border:1px solid #2a4b3d; background:#0c241c; color:var(--fg); outline:none;}
+  input::placeholder{color:#6f8b7e;}
+  button{padding:.85rem 1.1rem; border-radius:8px; border:1px solid #2a4b3d; background:#103528; color:var(--fg); cursor:pointer;}
+  button:hover{background:#123d2e}
+  .err{color:#f3a5a5; margin-top:.5rem; min-height:1.2em}
+  .fade{animation:fadein 1200ms ease both;}
+  @keyframes fadein{ from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card fade">
+    <h1>Das Gedächtnis der Schatten</h1>
+    <div class="verse">
+      <p>Ich bin die Ordnung, in der Blätter wachsen, das geheime Maß zwischen Sonne und Stiel.</p>
+      <p>Ich drehe mich weiter, ohne je zurückzugehen – und doch nennt man mich Ruhe.</p>
+      <p>Man findet mich in Zapfen, Körben, Samen, in der Stirn der Sonnenblume und im Schweigen des Farnes,</p>
+      <p>wo das Junge eingerollt liegt wie ein Versprechen.</p>
+      <p>Nenne meinen Namen.</p>
+    </div>
+
+    <div class="gate" aria-label="Passwort-Eingang">
+      <input id="pw" type="text" inputmode="text" autocomplete="off" placeholder="Name eingeben …">
+      <button id="go">Öffnen</button>
+    </div>
+    <div id="err" class="err" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  function norm(s){ return (s||"").normalize("NFKD").replace(/[^a-zA-Z]/g,"").toLowerCase(); }
+  const ok1 = "fyllotaxis";
+  const ok2 = "phyllotaxis";
+  const input = document.getElementById('pw');
+  const btn = document.getElementById('go');
+  const err = document.getElementById('err');
+
+  function check(){
+    const v = norm(input.value);
+    if(v === ok1 || v === ok2){
+      window.location.href = "finale.html";
+    }else{
+      err.textContent = "Noch nicht. Lausche der Spirale zwischen Blatt und Licht.";
+      input.focus();
+    }
+  }
+  btn.addEventListener('click', check);
+  input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ check(); }});
+})();
+</script>
+</body>
+</html>

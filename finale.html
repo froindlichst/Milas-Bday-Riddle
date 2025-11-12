@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farnlicht</title>
+<style>
+  :root { --bg:#06140f; --fg:#e6f2ea; --accent:#bdecc9; --muted:#a1b6ab; }
+  html,body{margin:0;height:100%;background:radial-gradient(1200px 800px at 70% 80%, #103e2c 0%, #0a231a 45%, #06140f 100%);color:var(--fg);font-family:"Georgia", serif;}
+  .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:6rem 1.25rem;}
+  .card{max-width:880px; line-height:1.7; position:relative; text-align:center;}
+  h1{font-weight:500; letter-spacing:0.02em; margin:0 0 1rem 0;}
+  p{margin:0 0 1rem 0; color:var(--muted)}
+  figure{margin:1.25rem auto; max-width:720px;}
+  img{max-width:100%; border-radius:12px; display:block; margin:0 auto; box-shadow:0 10px 40px rgba(0,0,0,.35)}
+  .note{font-size:.95rem; color:#8e9f97; margin-top:1rem;}
+  .small{font-size:.9rem; opacity:.85}
+  .btnrow{margin-top:1rem}
+  a.btn{display:inline-block; padding:.7rem 1rem; border-radius:8px; border:1px solid #2a4b3d; background:#103528; color:var(--fg); text-decoration:none}
+  a.btn:hover{background:#123d2e}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>Farnlicht</h1>
+    <p>Du hast den Kreis geschlossen.</p>
+    <figure>
+      <!-- Ersetze die Bildquelle unten durch dein bevorzugtes Farnfoto (lokal oder URL) -->
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Fern_unfurling.jpg/1024px-Fern_unfurling.jpg" alt="Ein junges Farnblatt, das sich spiralig entrollt.">
+      <figcaption class="small">Ein junges Farnblatt (circinate Vernation).</figcaption>
+    </figure>
+    <p class="note">Tipp: Ersetze in dieser Datei die <code>img src</code>-Adresse durch dein gewünschtes Bild.</p>
+    <div class="btnrow">
+      <a class="btn" href="index.html">Nochmal beginnen</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
